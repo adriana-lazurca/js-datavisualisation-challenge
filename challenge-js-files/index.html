@@ -27,6 +27,8 @@
   <link rel="stylesheet" href="./assets/font-awesome.min.css">
   <link rel="stylesheet" href="./assets/statexpflat.css">
   <link rel="stylesheet" href="./assets/statexpflat-grid.css">
+  <!-- Chart library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css">
 
   <style>
     a:lang(ar),
@@ -799,6 +801,9 @@
                 <span class="mw-headline" id="Crimes_et_d.C3.A9lits_enregistr.C3.A9s_par_les_services_de_police">Crimes recorded by the police</span>
               </h3>
 
+              <!-- ADD CHART 1 -->
+
+              <canvas id="crimesChart" style="height: 400px;"></canvas>
 
               <table cellspacing="0" cellpadding="0" id="table1">
                 <caption> Table 1: Offences recorded by the police, 2002-12</caption>
@@ -1469,6 +1474,8 @@
                 <span class="mw-headline" id="Homicides">Homicide</span>
               </h4>
 
+              <!-- ADD CHART 2 -->
+
               <table cellspacing="0" cellpadding="0" id="table2">
                 <caption>Prison population, average per year, 2007-09 and 2010-12
                   <br> (per 100,000 inhabitants)</caption>
@@ -2062,6 +2069,9 @@
 
     <!--END PAGE-->
   </div>
+  <!-- Chart library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
