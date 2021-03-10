@@ -174,3 +174,12 @@ var homicideChart = new Chart(homicideChartCanvas, {
         }
     }
 });
+
+
+// INSERT GRAPH
+
+var h1 = document.getElementById("firstHeading");
+var canvasElement = document.createElement("canvas");
+canvasElement.setAttribute("id", "liveChart");
+canvasElement.setAttribute("style", "height: 400px;");
+h1.insertAdjacentElement("afterend", canvasElement);
