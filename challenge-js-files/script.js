@@ -87,10 +87,83 @@ function createCanvasBeforeElement(element, idCanvas) {
 
 var crimesChartCanvas = createCanvasBeforeElement("table1", "crimesChart");
 
-// chart
+//create chart
 var crimesChart = new Chart(crimesChartCanvas, {
     type: 'line',
     data: chartData,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+//CREATE CHART II
+
+//read table and get data
+function getYearsHomicide(tableId) {
+    let rows = document.querySelectorAll(`#${tableId} thead tr`);
+    let yearsRow = rows[0];
+    let yearsCells = yearsRow.querySelectorAll("th");
+
+    var years = [];
+
+    for (let indexCell = 2; indexCell < yearsCells.length; indexCell++) {
+        let cell = yearsCells[indexCell];
+        let cellValue = cell.innerHTML;
+
+        years.push(cellValue);
+    }
+    return years;
+}
+
+function getCountryFromRowHomicide(row) {
+    let cells = row.querySelectorAll('td');
+
+    var country = {
+        name: cells[0].innerText,
+        crimesNr: []
+    };
+
+    for (let indexCell = 1; indexCell < cells.length; indexCell++) {
+        let cell = cells[indexCell];
+        let cellValue = parseInt(cell.innerHTML);
+        country.crimesNr.push(cellValue);
+    }
+
+    return country;
+}
+
+function readCountriesHomicide(tableId) {
+    var rows = document.querySelectorAll(`#${tableId} tbody tr`);
+    var countries = [];
+    for (let indexRow = 0; indexRow < rows.length; indexRow++) {
+        var country = getCountryFromRowHomicide(rows[indexRow]);
+        countries.push(country);
+    }
+    return countries;
+}
+
+var yearsHomicide = getYearsHomicide("table2");
+var countriesHomicide = readCountriesHomicide("table2");
+
+var chartDataHomicide = {
+    labels: yearsHomicide,
+    datasets: generateLinesChart(countriesHomicide)
+}
+
+//create Canvas
+var homicideChartCanvas = createCanvasBeforeElement("table2", "crimesChartHomicide");
+
+//create chart
+var homicideChart = new Chart(homicideChartCanvas, {
+    type: 'bar',
+    data: chartDataHomicide,
     options: {
         scales: {
             yAxes: [{
