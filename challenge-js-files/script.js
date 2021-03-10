@@ -1,3 +1,4 @@
+//CREATE CHART I
 function getCountryFromRow(row) {
     let cells = row.querySelectorAll('td');
 
@@ -15,35 +16,38 @@ function getCountryFromRow(row) {
     return country;
 }
 
-function getYearsFromRow(row) {
-    let cells = row.querySelectorAll('th');
+function getYears(tableId) {
+    let rows = document.querySelectorAll(`#${tableId} tbody tr`);
+    let yearsRow = rows[0];
+    let yearsCells = yearsRow.querySelectorAll("th");
+
     var years = [];
 
-    for (let indexCell = 2; indexCell < cells.length; indexCell++) {
-        let cell = cells[indexCell];
+    for (let indexCell = 0; indexCell < yearsCells.length; indexCell++) {
+        let cell = yearsCells[indexCell];
         let cellValue = parseInt(cell.innerHTML);
-        years.push(cellValue);
+
+        var isNumber = !isNaN(cellValue);
+        if (isNumber) {
+            years.push(cellValue);
+        }
     }
     return years;
 }
 
-var countries = [];
-var years = [];
-
-function readTable(tableId) {
-    var rows = document.querySelectorAll(`#${tableId} tr`);
+function readCountries(tableId) {
+    var rows = document.querySelectorAll(`#${tableId} tbody tr`);
+    var countries = [];
     for (let indexRow = 1; indexRow < rows.length; indexRow++) {
-        if (indexRow > 1) {
-            var country = getCountryFromRow(rows[indexRow]);
-            countries.push(country);
-        }
-        else {
-            years = getYearsFromRow(rows[indexRow]);
-        }
+        var country = getCountryFromRow(rows[indexRow]);
+        countries.push(country);
     }
+    return countries;
 }
 
-readTable("table1");
+var years = getYears("table1");
+
+var countries = readCountries("table1");
 
 function generateRandomColor() {
     var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -71,10 +75,20 @@ var chartData = {
     datasets: generateLinesChart(countries)
 }
 
-// chart
-var crimesChartElement = document.getElementById('crimesChart');
+//create Canvas
+function createCanvasBeforeElement(element, idCanvas) {
+    var element = document.getElementById(element);
+    var canvasElement = document.createElement("canvas");
+    canvasElement.setAttribute("id", idCanvas);
+    canvasElement.setAttribute("style", "height: 400px;");
+    element.parentNode.insertBefore(canvasElement, element);
+    return canvasElement;
+}
 
-var crimesChart = new Chart(crimesChartElement, {
+var crimesChartCanvas = createCanvasBeforeElement("table1", "crimesChart");
+
+// chart
+var crimesChart = new Chart(crimesChartCanvas, {
     type: 'line',
     data: chartData,
     options: {
@@ -84,7 +98,6 @@ var crimesChart = new Chart(crimesChartElement, {
                     beginAtZero: true
                 }
             }]
-
         }
     }
 });
