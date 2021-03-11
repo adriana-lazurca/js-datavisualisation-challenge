@@ -76,8 +76,8 @@ var chartData = {
 }
 
 //create Canvas
-function createCanvasBeforeElement(element, idCanvas) {
-    var element = document.getElementById(element);
+function createCanvasBeforeElement(idElement, idCanvas) {
+    var element = document.getElementById(idElement);
     var canvasElement = document.createElement("canvas");
     canvasElement.setAttribute("id", idCanvas);
     canvasElement.setAttribute("style", "height: 400px;");
@@ -176,10 +176,3 @@ var homicideChart = new Chart(homicideChartCanvas, {
 });
 
 
-// INSERT GRAPH
-
-var h1 = document.getElementById("firstHeading");
-var canvasElement = document.createElement("canvas");
-canvasElement.setAttribute("id", "liveChart");
-canvasElement.setAttribute("style", "height: 400px;");
-h1.insertAdjacentElement("afterend", canvasElement);
