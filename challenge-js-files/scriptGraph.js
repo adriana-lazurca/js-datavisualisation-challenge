@@ -1,5 +1,4 @@
 // INSERT GRAPH
-
 function createCanvasAfterElement(idElement, idCanvas) {
     var element = document.getElementById(idElement);
     var canvasElement = document.createElement("canvas");

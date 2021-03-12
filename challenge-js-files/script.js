@@ -67,6 +67,7 @@ function generateLinesChart(array) {
         };
         chartDataSets.push(objectChart);
     }
+
     return chartDataSets;
 }
 
@@ -91,6 +92,7 @@ var crimesChartCanvas = createCanvasBeforeElement("table1", "crimesChart");
 var crimesChart = new Chart(crimesChartCanvas, {
     type: 'line',
     data: chartData,
+    pointBackgroundColor: "black",
     options: {
         scales: {
             yAxes: [{
@@ -98,7 +100,20 @@ var crimesChart = new Chart(crimesChartCanvas, {
                     beginAtZero: true
                 }
             }]
+        },
+        legend: {
+            onClick: function (event, legendItem) {
+                var otherCountries = crimesChart.data.datasets.filter(country => country.label != legendItem.text);
+                var displayedCountry = crimesChart.data.datasets.find(country => country.label == legendItem.text);
+                displayedCountry.hidden = false;
+
+                otherCountries.forEach(country => {
+                    country.hidden = true;
+                });
+                crimesChart.update();
+            }
         }
+
     }
 });
 
@@ -171,7 +186,22 @@ var homicideChart = new Chart(homicideChartCanvas, {
                     beginAtZero: true
                 }
             }]
+        },
+        legend: {
+            onClick: function (event, legendItem) {
+                var otherCountries = homicideChart.data.datasets.filter(country => country.label != legendItem.text);
+                var displayedCountry = homicideChart.data.datasets.find(country => country.label == legendItem.text);
+                displayedCountry.hidden = false;
+
+                otherCountries.forEach(country => {
+                    country.hidden = true;
+                });
+                homicideChart.update();
+            }
         }
+
+
+
     }
 });
 
