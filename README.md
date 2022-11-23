@@ -1,6 +1,5 @@
 # "Data Visualisation" Challenge
-* #### Who's working on it:
-    _Adriana Lazurca_
+
 * ####  See the result [here](https://adriana-lazurca.github.io/js-datavisualisation-challenge/challenge-js-files/)!
 
 ## Objectives
